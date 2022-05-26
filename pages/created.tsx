@@ -1,4 +1,3 @@
-import WhereToSend from '@/components/WhereToSend'
 import { getQues } from '@/core/api'
 import { Ques } from '@/core/models'
 import { copy, getSlug } from '@/core/utils'
@@ -7,14 +6,16 @@ import { useState } from 'react'
 
 const Created: NextPage<IProps> = ({ ques }) => {
 	const [isCopy, setIsCopy] = useState<boolean>(false)
+
 	const url = `http://localhost:3000/${ques.slug}`
 
 	const copyHandler = () => {
 		setIsCopy(true)
 		copy(url)
 	}
+
 	return (
-		<div className='py-10 px-7'>
+		<div className='py-7 px-7'>
 			<div>
 				<h2 className='text-2xl font-bold'>{ques.title}</h2>
 				<h3 className='mt-2'>{ques.desc}</h3>
@@ -23,7 +24,7 @@ const Created: NextPage<IProps> = ({ ques }) => {
 				<h4 className='truncate w-full'>{url}</h4>
 				<div onClick={copyHandler} className='cursor-pointer'>
 					{isCopy ? (
-						<svg className='fill-green-500' width='24px' height='24px' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+						<svg className='fill-green-500 w-6' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
 							<g>
 								<g>
 									<rect width='24' height='24' opacity='0' />

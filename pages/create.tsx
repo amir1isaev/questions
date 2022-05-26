@@ -37,17 +37,22 @@ const Create: NextPage<IProps> = (p) => {
 				id: randomId(),
 				title: '',
 				value: '',
-				order: lastItem.order + 1,
+				order: lastItem?.order + 1 ?? 1,
 			},
 		])
 	}
 
 	const create = async () => {
+		localStorage.removeItem('create-desc')
+		localStorage.removeItem('create-title')
 		router.push({ pathname: '/created', query: { ques: 'tell_us_about_yourself_124' } })
+	}
+	const deleteQuestion = (id: number) => {
+		setQuestions(questions.filter((item) => item.id !== id))
 	}
 
 	return (
-		<div className='py-10 px-7'>
+		<div className='py-7 px-7'>
 			<div className='flex flex-col gap-1'>
 				<CreateInput setValue={setTitle} value={title} className='text-2xl font-bold' placeholder='Title' />
 				<CreateInput value={desc} setValue={setDesc} placeholder='Desscription' />
@@ -55,7 +60,16 @@ const Create: NextPage<IProps> = (p) => {
 			<div className='mt-4 relative'>
 				<div className='flex flex-col'>
 					{questions.sort(sortOrder).map((item) => (
-						<CreateItem setCurrentQues={setCurrentQues} currentQues={currentQues} setQuestions={setQuestions} key={item.id} questions={questions} changeHandler={changeHandler} item={item} />
+						<CreateItem
+							deleteQuestion={deleteQuestion}
+							setCurrentQues={setCurrentQues}
+							currentQues={currentQues}
+							setQuestions={setQuestions}
+							key={item.id}
+							questions={questions}
+							changeHandler={changeHandler}
+							item={item}
+						/>
 					))}
 				</div>
 				{!isMax && (

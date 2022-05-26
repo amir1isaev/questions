@@ -5,7 +5,7 @@ import { Ques, Question } from '@/core/models'
 import { getSlug } from '@/core/utils'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import { FC, useRef, useState } from 'react'
+import { FC, useRef, useState, useEffect } from 'react'
 
 const Ques: FC<IProps> = ({ ques }) => {
 	const scrollRef = useRef<HTMLDivElement>(null)
@@ -32,8 +32,12 @@ const Ques: FC<IProps> = ({ ques }) => {
 		router.push('/finish')
 	}
 
+	useEffect(() => {}, [questions])
+
+	useEffect(() => {}, [])
+
 	return (
-		<div ref={scrollRef} className='py-10 h-screen  overflow-auto'>
+		<div ref={scrollRef} className='py-6 h-screen  overflow-auto'>
 			<div ref={contendRef} style={{ paddingBottom: '100vh' }}>
 				<div>
 					<h2 className='text-2xl font-bold'>{ques.title}</h2>

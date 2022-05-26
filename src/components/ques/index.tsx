@@ -53,6 +53,8 @@ const Ques: FC<IProps> = (p) => {
 	}
 
 	const handler = () => {
+		if (!isShow) return
+		if (isFocus) return
 		focus()
 		setTimeout(() => {
 			const offsetTop = quesRef?.current?.offsetTop ?? 0
@@ -62,7 +64,7 @@ const Ques: FC<IProps> = (p) => {
 
 	return (
 		<div ref={quesRef} onClick={handler} className={['duration-200 py-3', isShow ? (isFocus ? 'opacity-100' : 'opacity-30') : ' overflow-hidden opacity-0'].join(' ')}>
-			<h5 className={['font-regular cursor-pointer text-lg font-medium duration-200'].join(' ')}>{ques.title}</h5>
+			<h5 className={['font-regular text-lg font-medium duration-200', isShow ? (isFocus ? 'cursor-default' : 'cursor-pointer') : 'cursor-default'].join(' ')}>{ques.title}</h5>
 			<textarea onBlur={blurHandler} onFocus={focus} onChange={changeHandler} value={ques.value} ref={textareaRef} className={['mt-1.5 w-full resize-none outline-none'].join(' ')}></textarea>
 		</div>
 	)
